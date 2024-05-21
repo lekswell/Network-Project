@@ -1,0 +1,94 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Snippets API",
+      "description": "DataLink Layer API",
+      "termsOfService": "https://www.google.com/policies/terms/",
+      "version": "v1"
+    },
+    "host": "localhost:8000",
+    "schemes": [
+      "http"
+    ],
+    "basePath": "/",
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "securityDefinitions": {
+      "Basic": {
+        "type": "basic"
+      }
+    },
+    "security": [
+      {
+        "Basic": []
+      }
+    ],
+    "paths": {
+      "/process_segment/": {
+        "post": {
+          "operationId": "process_segment_create",
+          "description": "Получает сегмент, в случае положительного ответа, отправляет сегмент на обработку\nи дальнейшую отправку на транспортный уровень",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string"
+                  },
+                  "num": {
+                    "type": "integer"
+                  },
+                  "size": {
+                    "type": "integer"
+                  },
+                  "time": {
+                    "type": "integer"
+                  }
+                },
+                "example": {
+                  "data": "Sample data",
+                  "num": 4,
+                  "size": 15,
+                  "time": 1711902448
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error: Segment data is lost"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "tags": [
+            "process_segment"
+          ]
+        },
+        "parameters": []
+      }
+    },
+    "definitions": {
+  
+    }
+  }
